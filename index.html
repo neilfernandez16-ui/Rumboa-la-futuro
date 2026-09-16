@@ -519,17 +519,38 @@ async function loadChildren(){
 }
 
 async function boot(){
+  // ¿venimos de un enlace de confirmación de correo (o de recuperación) de Supabase?
+  const hash = window.location.hash || "";
+  const justConfirmed = hash.includes("type=signup");
+  const justRecovered = hash.includes("type=recovery");
+
   const { data } = await sb.auth.getSession();
   if(data && data.session){
     state.user = data.session.user;
     await loadChildren();
   }
+
+  // limpia el token de la URL (no debe quedar visible ni compartible)
+  if(hash) history.replaceState(null, "", window.location.pathname + window.location.search);
+
   render();
+  if(justConfirmed) showToast("🎉 ¡Felicidades! Tu cuenta ha sido confirmada y registrada.");
+  else if(justRecovered) showToast("Ingresa tu nueva contraseña desde tu perfil.");
 }
 sb.auth.onAuthStateChange((_event, session) => {
+  const wasLoggedOut = !state.user;
   state.user = session ? session.user : null;
   if(!state.user){ state.children = []; state.currentChildId = null; render(); }
+  else if(wasLoggedOut && _event === "SIGNED_IN"){ /* boot() ya maneja el primer render */ }
 });
+
+function showToast(message){
+  const el = document.createElement("div");
+  el.textContent = message;
+  el.style.cssText = "position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:999; background:var(--success); color:#fff; padding:12px 20px; border-radius:12px; font-size:13.5px; font-weight:600; box-shadow:var(--shadow); max-width:90vw; text-align:center;";
+  document.body.appendChild(el);
+  setTimeout(()=>{ el.style.transition = "opacity .4s"; el.style.opacity = "0"; setTimeout(()=>el.remove(), 400); }, 4000);
+}
 
 function temaCurso(tema){
   for(const curso in TEMARIO){ if(TEMARIO[curso].includes(tema)) return curso; }
