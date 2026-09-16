@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rumbo al Futuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  html,body{margin:0; height:100%;}
+  :root{
+    --paper:#F4F2EC;
+    --surface:#FFFFFF;
+    --surface-2:#EAE6DA;
+    --ink:#1D2433;
+    --ink-soft:#5C6478;
+    --ink-faint:#8A8F9E;
+    --brand:#2A4B7C;
+    --brand-ink:#173154;
+    --brand-soft:#E4EBF4;
+    --sun:#E8952C;
+    --sun-soft:#FBEBD3;
+    --success:#2F8F5F;
+    --success-bg:#E1F1E8;
+    --danger:#CC4B3C;
+    --danger-bg:#FBE5E1;
+    --border:#DFDACB;
+    --border-strong:#C9C3AF;
+    --shadow: 0 1px 2px rgba(29,36,51,.05), 0 8px 24px -12px rgba(29,36,51,.18);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#15181F;
+      --surface:#1C2029;
+      --surface-2:#242833;
+      --ink:#ECEAE2;
+      --ink-soft:#A7ACB9;
+      --ink-faint:#787E8C;
+      --brand:#7FA6DC;
+      --brand-ink:#DCE7F6;
+      --brand-soft:#213249;
+      --sun:#EFA845;
+      --sun-soft:#3A2E17;
+      --success:#57BE8A;
+      --success-bg:#173327;
+      --danger:#E37766;
+      --danger-bg:#3A2018;
+      --border:#323744;
+      --border-strong:#3E4451;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15181F;
+    --surface:#1C2029;
+    --surface-2:#242833;
+    --ink:#ECEAE2;
+    --ink-soft:#A7ACB9;
+    --ink-faint:#787E8C;
+    --brand:#7FA6DC;
+    --brand-ink:#DCE7F6;
+    --brand-soft:#213249;
+    --sun:#EFA845;
+    --sun-soft:#3A2E17;
+    --success:#57BE8A;
+    --success-bg:#173327;
+    --danger:#E37766;
+    --danger-bg:#3A2018;
+    --border:#323744;
+    --border-strong:#3E4451;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand-font{font-family:'Sora', system-ui, sans-serif; text-wrap:balance;}
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+  a{color:var(--brand);}
+  button{font-family:inherit;}
+  ::selection{background:var(--sun-soft);}
+
+  .app{display:flex; min-height:100%; padding-inline:16px;}
+  .sidebar{
+    width:236px; flex:none; padding:20px 14px 20px 2px;
+    display:flex; flex-direction:column; gap:18px;
+    position:sticky; top:0; align-self:flex-start; height:100vh;
+  }
+  .side-logo{display:flex; align-items:center; gap:10px; padding:4px 10px 10px;}
+  .side-logo .mark{
+    width:34px;height:34px;border-radius:10px; background:linear-gradient(155deg,var(--brand),var(--sun));
+    display:flex;align-items:center;justify-content:center; flex:none;
+  }
+  .side-logo .mark svg{width:18px;height:18px;}
+  .side-logo .word{font-family:'Sora'; font-weight:700; font-size:15px; line-height:1.15; color:var(--ink);}
+  .side-logo .word small{display:block; font-weight:500; font-size:10.5px; color:var(--ink-faint); letter-spacing:.04em; text-transform:uppercase;}
+
+  .nav{display:flex; flex-direction:column; gap:2px;}
+  .nav button{
+    display:flex; align-items:center; gap:10px; text-align:left;
+    border:none; background:transparent; padding:9px 10px; border-radius:10px;
+    color:var(--ink-soft); font-size:13.5px; font-weight:500; cursor:pointer;
+  }
+  .nav button svg{width:17px;height:17px; flex:none; opacity:.85;}
+  .nav button:hover{background:var(--surface-2); color:var(--ink);}
+  .nav button.active{background:var(--brand-soft); color:var(--brand-ink); font-weight:600;}
+  .nav .section-label{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding:14px 10px 2px;}
+
+  .who-card{
+    margin-top:auto; border:1px solid var(--border); border-radius:12px; padding:11px;
+    background:var(--surface); display:flex; align-items:center; gap:9px;
+  }
+  .who-card .avatar{
+    width:32px;height:32px;border-radius:9px; background:var(--sun-soft); color:var(--sun);
+    display:flex;align-items:center;justify-content:center; font-weight:700; font-size:13px; flex:none;
+  }
+  .who-card .txt{min-width:0;}
+  .who-card .name{font-size:12.5px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .who-card .role{font-size:11px; color:var(--ink-faint);}
+  .who-card button{border:none; background:none; color:var(--ink-faint); cursor:pointer; font-size:11px; padding:2px; margin-left:auto;}
+  .who-card button:hover{color:var(--brand);}
+
+  .main{flex:1; min-width:0; padding:22px 4px 60px; max-width:960px;}
+  .topbar{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px; flex-wrap:wrap;}
+  .topbar h1{font-size:22px; margin:0 0 4px;}
+  .topbar .sub{color:var(--ink-soft); font-size:13.5px; max-width:52ch;}
+
+  .btn{
+    border:none; border-radius:10px; padding:10px 16px; font-size:13.5px; font-weight:600;
+    cursor:pointer; display:inline-flex; align-items:center; gap:7px; line-height:1.2;
+    transition:transform .08s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--brand); color:#fff;}
+  .btn-primary:hover{background:var(--brand-ink);}
+  .btn-sun{background:var(--sun); color:#2b1c00;}
+  .btn-ghost{background:var(--surface-2); color:var(--ink);}
+  .btn-ghost:hover{background:var(--border);}
+  .btn-outline{background:transparent; color:var(--ink); border:1.4px solid var(--border-strong);}
+  .btn-outline:hover{background:var(--surface-2);}
+  .btn:disabled{opacity:.5; cursor:not-allowed;}
+  .btn-sm{padding:7px 12px; font-size:12.5px; border-radius:8px;}
+  .btn svg{width:15px;height:15px;}
+
+  .grid-cards{display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:12px;}
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:16px; box-shadow:var(--shadow);
+  }
+  .card.tight{padding:14px;}
+  .action-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:16px; box-shadow:var(--shadow); cursor:pointer; text-align:left; width:100%;
+    display:flex; flex-direction:column; gap:10px; transition:border-color .12s, transform .08s;
+  }
+  .action-card:hover{border-color:var(--brand); transform:translateY(-1px);}
+  .action-card .icon{
+    width:38px;height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  }
+  .action-card .icon svg{width:19px;height:19px;}
+  .action-card h3{font-size:15px; margin:0;}
+  .action-card p{font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.4;}
+
+  .section{margin-bottom:30px;}
+  .section > h2{font-size:15.5px; margin:0 0 12px; display:flex; align-items:center; gap:8px;}
+  .section > h2 .count{color:var(--ink-faint); font-weight:500; font-size:12.5px;}
+
+  .task-row{
+    display:flex; align-items:center; gap:12px; padding:11px 4px; border-bottom:1px solid var(--border);
+  }
+  .task-row:last-child{border-bottom:none;}
+  .task-row .dot{width:8px;height:8px;border-radius:50%; flex:none;}
+  .task-row .txt{flex:1; min-width:0;}
+  .task-row .title{font-size:13.5px; font-weight:600;}
+  .task-row .meta{font-size:11.5px; color:var(--ink-faint);}
+  .pill{
+    display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:100px;
+    font-size:11px; font-weight:600; letter-spacing:.01em;
+  }
+  .pill-pend{background:var(--sun-soft); color:#8a5a00;}
+  .pill-done{background:var(--success-bg); color:var(--success);}
+  .pill-brand{background:var(--brand-soft); color:var(--brand-ink);}
+
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
+  .field label{font-size:12px; font-weight:600; color:var(--ink-soft);}
+  .field input, .field select, .field textarea{
+    border:1.4px solid var(--border-strong); border-radius:9px; padding:9px 11px; font-size:13.5px;
+    background:var(--surface); color:var(--ink); font-family:inherit;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--brand); outline-offset:1px;}
+  .field-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .field-row > .field{flex:1; min-width:150px;}
+  .chip-select{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{
+    border:1.4px solid var(--border-strong); background:var(--surface); border-radius:100px;
+    padding:6px 13px; font-size:12.5px; font-weight:500; cursor:pointer; color:var(--ink-soft);
+  }
+  .chip.on{background:var(--brand); border-color:var(--brand); color:#fff; font-weight:600;}
+
+  .modal-back{position:fixed; inset:0; background:rgba(20,20,25,.42); display:flex; align-items:flex-start; justify-content:center; padding:32px 16px; overflow-y:auto; z-index:50;}
+  .modal{
+    background:var(--surface); border-radius:16px; width:100%; max-width:560px; padding:22px;
+    box-shadow:0 24px 60px -12px rgba(0,0,0,.35); border:1px solid var(--border);
+  }
+  .modal h2{margin:0 0 4px; font-size:17px;}
+  .modal .lead{font-size:12.5px; color:var(--ink-soft); margin:0 0 18px;}
+  .modal-foot{display:flex; justify-content:flex-end; gap:8px; margin-top:6px;}
+
+  .dropzone{
+    border:2px dashed var(--border-strong); border-radius:12px; padding:26px 14px; text-align:center;
+    color:var(--ink-soft); font-size:12.5px; cursor:pointer; background:var(--surface-2);
+  }
+  .dropzone:hover{border-color:var(--brand);}
+  .dropzone svg{width:26px;height:26px; margin-bottom:6px; opacity:.6;}
+  .file-list{display:flex; flex-direction:column; gap:6px; margin-top:12px;}
+  .file-item{
+    display:flex; align-items:center; gap:9px; padding:7px 9px; border-radius:9px; background:var(--surface-2);
+    font-size:12px;
+  }
+  .file-item .fdot{width:26px;height:26px;border-radius:7px;background:var(--brand-soft); color:var(--brand-ink); display:flex;align-items:center;justify-content:center; flex:none;}
+  .file-item .fdot svg{width:13px;height:13px;}
+  .file-item .fname{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .file-item button{border:none;background:none;color:var(--ink-faint); cursor:pointer; padding:2px;}
+
+  .analysis-box{border:1px solid var(--border); border-radius:12px; padding:14px; background:var(--brand-soft);}
+  .analysis-box h4{margin:0 0 8px; font-size:13px; color:var(--brand-ink);}
+  .topic-tag{
+    display:inline-flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border);
+    border-radius:9px; padding:6px 10px; font-size:12px; margin:0 6px 6px 0;
+  }
+  .topic-tag b{font-weight:600;}
+
+  .quiz-shell{max-width:640px;}
+  .qprogress{display:flex; gap:4px; margin-bottom:18px;}
+  .qprogress .seg{flex:1; height:5px; border-radius:4px; background:var(--surface-2);}
+  .qprogress .seg.done{background:var(--success);}
+  .qprogress .seg.wrong{background:var(--danger);}
+  .qprogress .seg.cur{background:var(--brand);}
+  .qcard{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px; box-shadow:var(--shadow);}
+  .qmeta{display:flex; gap:8px; align-items:center; margin-bottom:10px; flex-wrap:wrap;}
+  .qtext{font-size:16.5px; font-weight:600; line-height:1.45; margin:0 0 18px;}
+  .opt{
+    display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left; padding:12px 13px;
+    border:1.6px solid var(--border); border-radius:11px; background:var(--surface); cursor:pointer;
+    font-size:13.5px; margin-bottom:9px; color:var(--ink); line-height:1.4;
+  }
+  .opt:hover{border-color:var(--brand);}
+  .opt .letter{
+    width:22px;height:22px;border-radius:7px;background:var(--surface-2); flex:none; display:flex; align-items:center;
+    justify-content:center; font-size:11.5px; font-weight:700; color:var(--ink-soft);
+  }
+  .opt.selected{border-color:var(--brand); background:var(--brand-soft);}
+  .opt.correct{border-color:var(--success); background:var(--success-bg);}
+  .opt.correct .letter{background:var(--success); color:#fff;}
+  .opt.incorrect{border-color:var(--danger); background:var(--danger-bg);}
+  .opt.incorrect .letter{background:var(--danger); color:#fff;}
+  .opt:disabled{cursor:default;}
+  .explain{margin-top:14px; padding:12px 14px; border-radius:10px; background:var(--surface-2); font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+  .explain b{color:var(--ink);}
+
+  .score-ring{
+    width:118px;height:118px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    flex:none; position:relative;
+  }
+  .score-ring .num{font-family:'Sora'; font-weight:800; font-size:26px;}
+  .score-ring .num small{font-size:13px; font-weight:600; opacity:.7;}
+
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); padding:0 10px 8px; font-weight:600;}
+  td{padding:9px 10px; border-top:1px solid var(--border);}
+  .table-wrap{overflow-x:auto; border-radius:12px; border:1px solid var(--border); background:var(--surface);}
+  .table-wrap table{min-width:480px;}
+
+  .bar-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .bar-row .lbl{width:130px; flex:none; font-size:12.5px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .bar-track{flex:1; height:9px; border-radius:6px; background:var(--surface-2); overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px;}
+  .bar-val{width:38px; flex:none; text-align:right; font-size:12px; color:var(--ink-soft);}
+
+  .empty{
+    text-align:center; padding:36px 16px; color:var(--ink-faint); font-size:13px;
+  }
+  .empty svg{width:34px;height:34px; opacity:.4; margin-bottom:8px;}
+
+  .child-picker-card{
+    display:flex; align-items:center; gap:12px; padding:13px; border:1px solid var(--border); border-radius:13px;
+    background:var(--surface); cursor:pointer; text-align:left; width:100%;
+  }
+  .child-picker-card:hover{border-color:var(--brand);}
+  .child-picker-card .avatar{width:42px;height:42px;border-radius:11px; background:var(--sun-soft); color:#8a5a00; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; flex:none;}
+  .child-picker-card .txt{flex:1;}
+  .child-picker-card .n{font-weight:700; font-size:14px;}
+  .child-picker-card .d{font-size:12px; color:var(--ink-faint);}
+
+  .mobile-topbar{display:none;}
+  @media (max-width: 860px){
+    body{padding-bottom:0;}
+    .app{padding-inline:0; flex-direction:column;}
+    .sidebar{display:none;}
+    .mobile-topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 16px; padding-top:calc(12px + env(safe-area-inset-top,0px));
+      border-bottom:1px solid var(--border); background:var(--surface); position:sticky; top:0; z-index:20;
+    }
+    .mobile-topbar .side-logo{padding:0;}
+    .main{padding:18px 16px 90px; max-width:100%;}
+    .bottom-nav{
+      position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--surface); border-top:1px solid var(--border);
+      display:flex; padding-bottom:env(safe-area-inset-bottom,0px);
+    }
+    .bottom-nav button{
+      flex:1; border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:3px;
+      padding:9px 4px; color:var(--ink-faint); font-size:10.5px; font-weight:600; cursor:pointer;
+    }
+    .bottom-nav button svg{width:19px;height:19px;}
+    .bottom-nav button.active{color:var(--brand);}
+    .field-row{flex-direction:column;}
+    .grid-cards{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:480px){
+    .grid-cards{grid-template-columns:1fr;}
+  }
+
+  [hidden]{display:none !important;}
+
+  /* ---- Auth screen ---- */
+  .auth-wrap{min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px;}
+  .auth-card{
+    width:100%; max-width:380px; background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:28px 24px; box-shadow:var(--shadow);
+  }
+  .auth-logo{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
+  .auth-tabs{display:flex; gap:4px; background:var(--surface-2); border-radius:10px; padding:3px; margin-bottom:18px;}
+  .auth-tabs button{flex:1; border:none; background:none; padding:8px; border-radius:8px; font-size:12.5px; font-weight:600; color:var(--ink-soft); cursor:pointer;}
+  .auth-tabs button.on{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.06);}
+  .auth-error{background:var(--danger-bg); color:var(--danger); font-size:12px; padding:9px 11px; border-radius:9px; margin-bottom:12px;}
+  .auth-note{font-size:11.5px; color:var(--ink-faint); margin-top:10px; text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR (desktop) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-logo">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 18L10 6l4 8 3-5 3 9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="word">Rumbo al Futuro<small>Práctica con IA</small></div>
+    </div>
+    <nav class="nav" id="navMain"></nav>
+    <div class="who-card" id="whoCard"></div>
+  </aside>
+
+  <!-- MOBILE TOPBAR -->
+  <div class="mobile-topbar">
+    <div class="side-logo">
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18L10 6l4 8 3-5 3 9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="word">Rumbo al Futuro</div>
+    </div>
+    <button class="btn btn-ghost btn-sm" id="mobileSwitchBtn">Cambiar</button>
+  </div>
+
+  <main class="main" id="main"></main>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav" id="bottomNav"></nav>
+</div>
+
+<div id="modalRoot"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* ---------------- SUPABASE ---------------- */
+const SUPABASE_URL = "https://khinaqxbauwnjpwhokuz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_zCz1GaxBLdWXULjKJEqBjA_q9eNrP7W";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ---------------- ICONS ---------------- */
+const ICO = {
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg>',
+  tasks:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6h10M9 12h10M9 18h10"/><path d="M4.5 6l.9.9L7 5.3"/><path d="M4.5 12l.9.9L7 11.3"/><path d="M4.5 18l.9.9L7 17.3"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>',
+  camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.4"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 19V10M12 19V5M19 19v-6"/></svg>',
+  kid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5c2.5-1 5-1 8 0v13c-3-1-5.5-1-8 0z"/><path d="M20 5.5c-2.5-1-5-1-8 0v13c3-1 5.5-1 8 0z"/></svg>',
+  swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>',
+  file:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M9.5 13.2h1.2c.6 0 1 .4 1 1s-.4 1-1 1H9.5v-3.4h1.2M14.2 13.2v3.4M17 13.2h-1.8v3.4"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4 10-10"/></svg>',
+  sparkle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg>',
+  refresh:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12a7 7 0 0111.5-5.3M19 12a7 7 0 01-11.5 5.3"/><path d="M16 4v3.5h-3.5M8 20v-3.5h3.5"/></svg>',
+  arrowR:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>',
+};
+
+/* ---------------- CURRICULUM DATA ---------------- */
+const NIVELES = ["Inicial","Primaria","Secundaria","Preuniversitario","Admisión"];
+const GRADOS = {
+  "Inicial": ["3 años","4 años","5 años"],
+  "Primaria": ["1.º","2.º","3.º","4.º","5.º","6.º"],
+  "Secundaria": ["1.º","2.º","3.º","4.º","5.º"],
+  "Preuniversitario": ["Ciclo I","Ciclo II"],
+  "Admisión": ["Postulante"]
+};
+const CURSOS = ["Matemática","Comunicación","Ciencia y Tecnología","Física","Química","Biología","Historia","Geografía","Inglés","Razonamiento Matemático","Razonamiento Verbal"];
+
+const TEMARIO = {
+  "Matemática": ["Fracciones","Números enteros","Ecuaciones lineales","Razones y proporciones","Geometría: perímetro y área"],
+  "Comunicación": ["Comprensión lectora: inferencias","Ortografía y tildación"],
+  "Biología": ["La célula","Sistemas del cuerpo humano"],
+  "Ciencia y Tecnología": ["La célula","Energía y sus formas"],
+  "Historia": ["Culturas preincaicas del Perú","La independencia del Perú"],
+  "Geografía": ["Relieve del Perú"],
+  "Física": ["Movimiento rectilíneo uniforme"],
+  "Química": ["Estados de la materia"],
+  "Inglés": ["Simple present tense"],
+  "Razonamiento Matemático": ["Sucesiones numéricas"],
+  "Razonamiento Verbal": ["Analogías verbales"]
+};
+
+/* ---------------- QUESTION BANK ---------------- */
+// Each: tema, sub, dif (Fácil/Intermedio/Difícil), q, opts[], correct index, why
+const BANK = {
+"Fracciones":[
+ {sub:"Suma de fracciones", dif:"Fácil", q:"¿Cuánto es 1/4 + 1/4?", opts:["1/2","2/8","1/4","2/4 y 1/2 son distintos"], c:0, why:"Al tener el mismo denominador, se suman los numeradores: 1+1=2, quedando 2/4, que simplificado es 1/2."},
+ {sub:"Suma de fracciones", dif:"Intermedio", q:"¿Cuánto es 2/3 + 1/6?", opts:["3/9","5/6","1/2","1"], c:1, why:"Se convierte 2/3 a sextos: 4/6. Luego 4/6 + 1/6 = 5/6."},
+ {sub:"Comparación", dif:"Fácil", q:"¿Cuál fracción es mayor: 3/5 o 2/5?", opts:["2/5","3/5","Son iguales","No se puede saber"], c:1, why:"Con el mismo denominador, es mayor la que tiene el numerador más grande: 3 > 2."},
+ {sub:"Multiplicación", dif:"Intermedio", q:"¿Cuánto es 2/3 × 3/4?", opts:["6/12 = 1/2","5/7","6/7","1"], c:0, why:"Se multiplican numeradores (2×3=6) y denominadores (3×4=12): 6/12, que simplificado es 1/2."},
+ {sub:"División", dif:"Difícil", q:"¿Cuánto es (3/4) ÷ (1/2)?", opts:["3/8","1 1/2","2/3","3/2 es igual a 1 1/2"], c:1, why:"Dividir fracciones es multiplicar por el inverso: 3/4 × 2/1 = 6/4 = 1 1/2."},
+ {sub:"Fracción de una cantidad", dif:"Intermedio", q:"Ana leyó 3/5 de un libro de 200 páginas. ¿Cuántas páginas leyó?", opts:["100","120","150","60"], c:1, why:"200 ÷ 5 = 40 (cada quinto). 40 × 3 = 120 páginas."},
+ {sub:"Simplificación", dif:"Fácil", q:"Simplifica la fracción 8/12.", opts:["4/6","2/3","3/4","8/12 ya está simplificada"], c:1, why:"Se divide numerador y denominador entre su máximo común divisor, 4: 8÷4=2, 12÷4=3, queda 2/3."},
+ {sub:"Fracciones equivalentes", dif:"Fácil", q:"¿Qué fracción es equivalente a 1/2?", opts:["2/5","3/6","4/9","5/8"], c:1, why:"3/6 se simplifica dividiendo entre 3: 3÷3=1, 6÷3=2, quedando 1/2."},
+ {sub:"Problema con fracciones", dif:"Difícil", q:"Un tanque está lleno hasta 3/4 de su capacidad. Si se le agregan 20 litros y queda completamente lleno con 80 litros en total, ¿qué fracción representaban los 20 litros?", opts:["1/4","1/5","1/3","3/4"], c:0, why:"Si el total es 80 litros y 3/4 ya estaban (60 litros), los 20 litros restantes son 20/80 = 1/4."},
+ {sub:"Resta de fracciones", dif:"Intermedio", q:"¿Cuánto es 5/6 − 1/3?", opts:["4/3","1/2","4/6 y 1/2 son iguales, correcto","2/3"], c:2, why:"1/3 equivale a 2/6. Entonces 5/6 − 2/6 = 3/6, que simplificado es 1/2."}
+],
+"Números enteros":[
+ {sub:"Suma de enteros", dif:"Fácil", q:"¿Cuánto es (−5) + 8?", opts:["3","−3","13","−13"], c:0, why:"Se resta el menor valor absoluto del mayor y se conserva el signo del mayor: 8−5=3, positivo porque 8 tiene mayor valor absoluto."},
+ {sub:"Resta de enteros", dif:"Intermedio", q:"¿Cuánto es (−4) − (−9)?", opts:["−13","5","13","−5"], c:1, why:"Restar un negativo equivale a sumar: −4 + 9 = 5."},
+ {sub:"Multiplicación de enteros", dif:"Fácil", q:"¿Cuánto es (−6) × (−3)?", opts:["−18","18","9","−9"], c:1, why:"El producto de dos números negativos es positivo: 6×3=18."},
+ {sub:"Orden en la recta numérica", dif:"Fácil", q:"¿Cuál es el menor de estos números: −8, −3, 0, 5?", opts:["0","5","−3","−8"], c:3, why:"En los negativos, mientras más lejos está del cero, menor es el número: −8 es menor que −3."},
+ {sub:"Valor absoluto", dif:"Intermedio", q:"¿Cuánto es |−7| + |3|?", opts:["10","−10","4","−4"], c:0, why:"El valor absoluto siempre es positivo: |−7|=7 y |3|=3, entonces 7+3=10."}
+],
+"Ecuaciones lineales":[
+ {sub:"Ecuación simple", dif:"Fácil", q:"Resuelve: x + 5 = 12", opts:["x = 5","x = 7","x = 17","x = −7"], c:1, why:"Se resta 5 en ambos lados: x = 12 − 5 = 7."},
+ {sub:"Ecuación con coeficiente", dif:"Intermedio", q:"Resuelve: 3x = 21", opts:["x = 7","x = 18","x = 63","x = 24"], c:0, why:"Se divide ambos lados entre 3: x = 21 ÷ 3 = 7."},
+ {sub:"Ecuación de dos pasos", dif:"Intermedio", q:"Resuelve: 2x + 4 = 18", opts:["x = 7","x = 11","x = 9","x = 5"], c:0, why:"Se resta 4: 2x=14. Se divide entre 2: x=7."},
+ {sub:"Ecuación con incógnita en ambos lados", dif:"Difícil", q:"Resuelve: 5x − 3 = 2x + 9", opts:["x = 2","x = 4","x = 3","x = 6"], c:1, why:"Se pasa 2x al otro lado: 3x − 3 = 9. Se suma 3: 3x=12. Se divide entre 3: x=4."},
+ {sub:"Problema con ecuaciones", dif:"Difícil", q:"La suma de un número y el doble de ese número es 27. ¿Cuál es el número?", opts:["9","8","7","13.5"], c:0, why:"Se plantea x + 2x = 27, es decir 3x=27, entonces x=9."}
+],
+"Razones y proporciones":[
+ {sub:"Razón", dif:"Fácil", q:"En un salón hay 12 hombres y 18 mujeres. ¿Cuál es la razón de hombres a mujeres?", opts:["2:3","3:2","12:30","18:12"], c:0, why:"12/18 se simplifica dividiendo entre 6: 12÷6=2 y 18÷6=3, quedando 2:3."},
+ {sub:"Proporción", dif:"Intermedio", q:"Si 4 obreros hacen un trabajo en 6 días, ¿cuántos días tardarán 8 obreros (trabajo directamente proporcional al inverso de obreros)?", opts:["12 días","3 días","8 días","2 días"], c:1, why:"Es proporcionalidad inversa: 4×6 = 8×d, entonces 24=8d, d=3 días."},
+ {sub:"Regla de tres simple", dif:"Fácil", q:"Si 5 cuadernos cuestan 25 soles, ¿cuánto cuestan 8 cuadernos?", opts:["40 soles","35 soles","45 soles","30 soles"], c:0, why:"Cada cuaderno cuesta 25÷5=5 soles. 8 cuadernos cuestan 8×5=40 soles."}
+],
+"Geometría: perímetro y área":[
+ {sub:"Perímetro", dif:"Fácil", q:"¿Cuál es el perímetro de un rectángulo de 8 cm de largo y 5 cm de ancho?", opts:["13 cm","26 cm","40 cm","20 cm"], c:1, why:"Perímetro = 2×(largo+ancho) = 2×(8+5) = 2×13 = 26 cm."},
+ {sub:"Área", dif:"Fácil", q:"¿Cuál es el área de un cuadrado de lado 6 cm?", opts:["24 cm²","12 cm²","36 cm²","30 cm²"], c:2, why:"Área del cuadrado = lado × lado = 6×6 = 36 cm²."},
+ {sub:"Área de triángulo", dif:"Intermedio", q:"¿Cuál es el área de un triángulo con base 10 cm y altura 6 cm?", opts:["60 cm²","30 cm²","16 cm²","20 cm²"], c:1, why:"Área del triángulo = (base × altura)/2 = (10×6)/2 = 30 cm²."}
+],
+"Comprensión lectora: inferencias":[
+ {sub:"Inferencia", dif:"Intermedio", q:"\"Marco llegó a casa empapado, con el paraguas roto y respirando con dificultad.\" ¿Qué se puede inferir?", opts:["Marco fue a la piscina","Marco corrió bajo una tormenta fuerte","Marco se quedó dormido","Marco no salió de casa"], c:1, why:"Los detalles de estar empapado, con el paraguas roto y respirando con dificultad sugieren que corrió durante una tormenta."},
+ {sub:"Idea principal", dif:"Fácil", q:"Un texto describe cómo las abejas polinizan flores y por qué son esenciales para los cultivos. ¿Cuál es la idea principal?", opts:["Las flores tienen colores distintos","Las abejas son importantes para la agricultura por la polinización","Los cultivos crecen sin ayuda","Las abejas viven en colmenas"], c:1, why:"El texto se centra en explicar el rol de las abejas en la polinización y su importancia agrícola."},
+ {sub:"Vocabulario en contexto", dif:"Intermedio", q:"\"El profesor fue muy parco al calificar los exámenes.\" ¿Qué significa 'parco' en esta oración?", opts:["Generoso","Breve o poco expresivo","Alegre","Injusto"], c:1, why:"'Parco' significa moderado o breve en palabras o acciones; en este contexto, calificó de forma escueta."}
+],
+"La célula":[
+ {sub:"Estructura celular", dif:"Fácil", q:"¿Qué parte de la célula controla sus actividades y contiene el material genético?", opts:["Mitocondria","Núcleo","Membrana celular","Citoplasma"], c:1, why:"El núcleo contiene el ADN y dirige las actividades celulares."},
+ {sub:"Tipos de células", dif:"Intermedio", q:"¿Cuál es la principal diferencia entre una célula animal y una célula vegetal?", opts:["La célula vegetal tiene pared celular y cloroplastos, la animal no","La célula animal es más grande siempre","Solo la célula vegetal tiene núcleo","No hay diferencias"], c:0, why:"Las células vegetales tienen pared celular y cloroplastos para la fotosíntesis, estructuras que las células animales no poseen."},
+ {sub:"Función celular", dif:"Intermedio", q:"¿Qué organelo se conoce como la 'central energética' de la célula?", opts:["Ribosoma","Mitocondria","Vacuola","Lisosoma"], c:1, why:"La mitocondria produce energía (ATP) mediante la respiración celular."}
+],
+"Culturas preincaicas del Perú":[
+ {sub:"Cultura Nazca", dif:"Fácil", q:"¿Por qué es reconocida principalmente la cultura Nazca?", opts:["Por sus líneas y geoglifos en el desierto","Por construir Machu Picchu","Por sus barcos de totora","Por dominar los Andes"], c:0, why:"La cultura Nazca es famosa por sus líneas y geoglifos trazados en el desierto, visibles desde el aire."},
+ {sub:"Cultura Moche", dif:"Intermedio", q:"¿Qué caracterizó a la cerámica de la cultura Moche?", opts:["Era completamente abstracta","Representaba escenas realistas de la vida cotidiana y rituales","No usaban cerámica","Solo hacían vasijas de oro"], c:1, why:"La cerámica Moche destaca por su realismo, representando personas, animales, actividades y rituales."}
+]
+};
+
+/* ---------------- STATE ---------------- */
+let state = { role:"padre", children:[], currentChildId:null, view:"home", user:null, authMode:"login", authError:"", authBusy:false };
+
+function saveState(){ /* persistencia real: cada mutación escribe directo a Supabase (ver más abajo) */ }
+function uid(){ return crypto.randomUUID(); }
+
+function currentChild(){
+  return state.children.find(c => c.id === state.currentChildId) || null;
+}
+
+/* ---------------- CARGA DE DATOS DESDE SUPABASE ---------------- */
+async function loadChildren(){
+  const { data: students, error } = await sb.from("students").select("*").order("created_at", { ascending:true });
+  if(error){ console.error(error); return; }
+  const children = [];
+  for(const s of (students||[])){
+    const [{ data: practices }, { data: results }] = await Promise.all([
+      sb.from("practices").select("*").eq("student_id", s.id).order("created_at", { ascending:false }),
+      sb.from("results").select("*").eq("student_id", s.id).order("created_at", { ascending:false }),
+    ]);
+    children.push({
+      id: s.id, nombre: s.nombre, apellidos: s.apellidos||"", edad: s.edad, nivel: s.nivel, grado: s.grado,
+      colegio: s.colegio||"", pais: s.pais||"Perú", cursos: s.cursos||[],
+      practices: (practices||[]).map(p => ({ id:p.id, curso:p.curso, tema:p.tema, dificultad:p.dificultad, tipo:p.tipo, n:p.n, status:p.status, createdAt: new Date(p.created_at).getTime() })),
+      results: (results||[]).map(r => ({ id:r.id, practiceId:r.practice_id, curso:r.curso, tema:r.tema, score:r.score, total:r.total, answered:r.answered, date: new Date(r.created_at).getTime() })),
+    });
+  }
+  state.children = children;
+  if(!children.find(c=>c.id===state.currentChildId)) state.currentChildId = children[0] ? children[0].id : null;
+}
+
+async function boot(){
+  const { data } = await sb.auth.getSession();
+  if(data && data.session){
+    state.user = data.session.user;
+    await loadChildren();
+  }
+  render();
+}
+sb.auth.onAuthStateChange((_event, session) => {
+  state.user = session ? session.user : null;
+  if(!state.user){ state.children = []; state.currentChildId = null; render(); }
+});
+
+function temaCurso(tema){
+  for(const curso in TEMARIO){ if(TEMARIO[curso].includes(tema)) return curso; }
+  return "Matemática";
+}
+
+function pickQuestions(tema, n){
+  const bank = BANK[tema] || [];
+  if(bank.length === 0) return [];
+  let out = [];
+  for(let i=0;i<n;i++){
+    const base = bank[i % bank.length];
+    out.push({ tema, sub: base.sub, dif: base.dif, q: base.q, opts: base.opts, c: base.c, why: base.why, variant: i>=bank.length });
+  }
+  return out;
+}
+
+/* ---------------- RENDER ROOT ---------------- */
+const mainEl = document.getElementById("main");
+const navMain = document.getElementById("navMain");
+const whoCard = document.getElementById("whoCard");
+const bottomNav = document.getElementById("bottomNav");
+const modalRoot = document.getElementById("modalRoot");
+const sidebarEl = document.getElementById("sidebar");
+const mobileTopEl = document.querySelector(".mobile-topbar");
+
+function esc(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function go(view){ state.view = view; saveState(); render(); }
+
+function render(){
+  if(!state.user){
+    sidebarEl.style.display = "none";
+    mobileTopEl.style.display = "none";
+    bottomNav.innerHTML = "";
+    renderAuthScreen();
+    return;
+  }
+  sidebarEl.style.display = "";
+  mobileTopEl.style.display = "";
+  renderSidebar();
+  renderBottomNav();
+  const v = state.view;
+  if(v === "home") renderHome();
+  else if(v === "children") renderChildren();
+  else if(v === "practices") renderPractices();
+  else if(v === "material") renderMaterialUpload();
+  else if(v === "progress") renderProgress();
+  else if(v === "quiz") renderQuiz();
+  else if(v === "results") renderResults();
+  else renderHome();
+  window.scrollTo(0,0);
+}
+
+function navItems(){
+  return [
+    {id:"home", label:"Inicio", icon:ICO.home},
+    {id:"practices", label:"Tareas y prácticas", icon:ICO.tasks},
+    {id:"material", label:"Subir material", icon:ICO.camera},
+    {id:"progress", label:"Progreso", icon:ICO.chart},
+    {id:"children", label: state.role==="padre" ? "Mis hijos" : "Mi perfil", icon:ICO.kid},
+  ];
+}
+
+function renderSidebar(){
+  const items = navItems();
+  navMain.innerHTML = items.map(it => `
+    <button data-nav="${it.id}" class="${state.view===it.id?'active':''}">${it.icon}<span>${it.label}</span></button>
+  `).join("");
+  navMain.querySelectorAll("button").forEach(b => b.onclick = () => go(b.dataset.nav));
+
+  const child = currentChild();
+  whoCard.innerHTML = `
+    <div class="avatar">${ICO.kid}</div>
+    <div class="txt">
+      <div class="name">${child ? esc(child.nombre) : "Sin hijo"}</div>
+      <div class="role" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${esc(state.user.email)}</div>
+    </div>
+    <button title="Cerrar sesión" data-signout="1">${ICO.swap}</button>
+  `;
+  const sw = whoCard.querySelector("[data-signout]");
+  if(sw) sw.onclick = () => { if(confirm("¿Cerrar sesión?")) handleSignOut(); };
+}
+
+function renderBottomNav(){
+  const items = navItems();
+  bottomNav.innerHTML = items.map(it => `
+    <button data-nav="${it.id}" class="${state.view===it.id?'active':''}">${it.icon}<span>${it.label.split(" ")[0]}</span></button>
+  `).join("");
+  bottomNav.querySelectorAll("button").forEach(b => b.onclick = () => go(b.dataset.nav));
+}
+document.getElementById("mobileSwitchBtn").onclick = () => { if(confirm("¿Cerrar sesión?")) handleSignOut(); };
+
+function closeModal(){ modalRoot.innerHTML = ""; }
+
+function openNewChildModal(){
+  modalRoot.innerHTML = `
+    <div class="modal-back" id="mb">
+      <div class="modal">
+        <h2>Registrar estudiante</h2>
+        <p class="lead">Estos datos permiten generar prácticas ajustadas al nivel y currículo correcto.</p>
+        <div class="field-row">
+          <div class="field"><label>Nombre</label><input id="f_nombre" placeholder="Ej. Valeria"></div>
+          <div class="field"><label>Apellidos</label><input id="f_apellidos" placeholder="Ej. Quispe"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Edad</label><input id="f_edad" type="number" min="3" max="25" placeholder="12"></div>
+          <div class="field"><label>País</label><input id="f_pais" placeholder="Perú" value="Perú"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Nivel educativo</label>
+            <select id="f_nivel">${NIVELES.map(n=>`<option value="${n}">${n}</option>`).join("")}</select>
+          </div>
+          <div class="field"><label>Grado</label><select id="f_grado"></select></div>
+        </div>
+        <div class="field"><label>Colegio (opcional)</label><input id="f_colegio" placeholder="Ej. I.E. San Martín"></div>
+        <div class="field">
+          <label>Cursos que estudia</label>
+          <div class="chip-select" id="f_cursos">${CURSOS.map(c=>`<span class="chip" data-c="${esc(c)}">${c}</span>`).join("")}</div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-outline btn-sm" id="cancelNew">Cancelar</button>
+          <button class="btn btn-primary btn-sm" id="saveNew">Guardar estudiante</button>
+        </div>
+      </div>
+    </div>
+  `;
+  const nivelSel = modalRoot.querySelector("#f_nivel");
+  const gradoSel = modalRoot.querySelector("#f_grado");
+  function fillGrados(){ gradoSel.innerHTML = GRADOS[nivelSel.value].map(g=>`<option value="${g}">${g}</option>`).join(""); }
+  fillGrados();
+  nivelSel.onchange = fillGrados;
+
+  const selectedCursos = new Set();
+  modalRoot.querySelectorAll("#f_cursos .chip").forEach(ch=>{
+    ch.onclick = () => { ch.classList.toggle("on"); if(ch.classList.contains("on")) selectedCursos.add(ch.dataset.c); else selectedCursos.delete(ch.dataset.c); };
+  });
+
+  modalRoot.querySelector("#cancelNew").onclick = closeModal;
+  modalRoot.querySelector("#saveNew").onclick = async () => {
+    const nombre = modalRoot.querySelector("#f_nombre").value.trim();
+    if(!nombre){ modalRoot.querySelector("#f_nombre").focus(); return; }
+    const btn = modalRoot.querySelector("#saveNew");
+    btn.disabled = true; btn.textContent = "Guardando…";
+    const row = {
+      parent_id: state.user.id,
+      nombre, apellidos: modalRoot.querySelector("#f_apellidos").value.trim(),
+      edad: parseInt(modalRoot.querySelector("#f_edad").value)||null,
+      nivel: nivelSel.value, grado: gradoSel.value,
+      colegio: modalRoot.querySelector("#f_colegio").value.trim(),
+      pais: modalRoot.querySelector("#f_pais").value.trim() || "Perú",
+      cursos: Array.from(selectedCursos),
+    };
+    const { data, error } = await sb.from("students").insert(row).select().single();
+    if(error){ alert("No se pudo guardar: " + error.message); btn.disabled=false; btn.textContent="Guardar estudiante"; return; }
+    state.children.push({ ...row, id: data.id, practices:[], results:[] });
+    state.currentChildId = data.id; state.view = "children";
+    closeModal(); render();
+  };
+}
+
+/* ---------------- AUTH ---------------- */
+function renderAuthScreen(){
+  const mode = state.authMode;
+  mainEl.innerHTML = `
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <div class="auth-logo">
+          <div class="mark" style="width:34px;height:34px;border-radius:10px;background:linear-gradient(155deg,var(--brand),var(--sun));display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;"><path d="M4 18L10 6l4 8 3-5 3 9" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="word" style="font-family:'Sora'; font-weight:700; font-size:15px;">Rumbo al Futuro</div>
+        </div>
+        <div class="auth-tabs">
+          <button data-mode="login" class="${mode==='login'?'on':''}">Iniciar sesión</button>
+          <button data-mode="signup" class="${mode==='signup'?'on':''}">Crear cuenta</button>
+        </div>
+        ${state.authError ? `<div class="auth-error">${esc(state.authError)}</div>` : ""}
+        <div class="field"><label>Correo</label><input id="auth_email" type="email" placeholder="tu@correo.com" autocomplete="email"></div>
+        <div class="field"><label>Contraseña</label><input id="auth_password" type="password" placeholder="${mode==='signup'?'Mínimo 6 caracteres':'Tu contraseña'}" autocomplete="${mode==='signup'?'new-password':'current-password'}"></div>
+        <button class="btn btn-primary" id="auth_submit" style="width:100%; justify-content:center;" ${state.authBusy?'disabled':''}>
+          ${state.authBusy ? "Un momento…" : (mode==='signup' ? "Crear cuenta" : "Entrar")}
+        </button>
+        <div class="auth-note">${mode==='signup' ? "Esta cuenta es para padres/tutores. Cada hijo se registra después, dentro de la app." : "¿No tienes cuenta? Usa la pestaña “Crear cuenta”."}</div>
+      </div>
+    </div>
+  `;
+  mainEl.querySelectorAll("[data-mode]").forEach(b=>{
+    b.onclick = () => { state.authMode = b.dataset.mode; state.authError=""; render(); };
+  });
+  const emailEl = mainEl.querySelector("#auth_email");
+  const passEl = mainEl.querySelector("#auth_password");
+  const submit = async () => {
+    const email = emailEl.value.trim();
+    const password = passEl.value;
+    if(!email || password.length < 6){ state.authError = "Ingresa un correo válido y una contraseña de al menos 6 caracteres."; render(); return; }
+    state.authBusy = true; state.authError = ""; render();
+    let result;
+    if(mode === "signup") result = await sb.auth.signUp({ email, password });
+    else result = await sb.auth.signInWithPassword({ email, password });
+    state.authBusy = false;
+    if(result.error){ state.authError = result.error.message; render(); return; }
+    if(mode === "signup" && result.data.user && !result.data.session){
+      state.authError = "";
+      mainEl.innerHTML = `<div class="auth-wrap"><div class="auth-card" style="text-align:center;"><h2>Revisa tu correo</h2><p class="lead">Te enviamos un enlace de confirmación a ${esc(email)}. Ábrelo y luego vuelve a iniciar sesión aquí.</p></div></div>`;
+      return;
+    }
+    state.user = result.data.session ? result.data.session.user : result.data.user;
+    await loadChildren();
+    render();
+  };
+  mainEl.querySelector("#auth_submit").onclick = submit;
+  passEl.addEventListener("keydown", e => { if(e.key === "Enter") submit(); });
+}
+
+async function handleSignOut(){
+  await sb.auth.signOut();
+  state.user = null; state.children = []; state.currentChildId = null;
+  state.authMode = "login"; state.view = "home";
+  render();
+}
+
+/* ---------------- HOME ---------------- */
+function renderHome(){
+  const c = currentChild();
+  if(!c){ mainEl.innerHTML = emptyChildState(); bindEmptyChild(); return; }
+  const pending = c.practices.filter(p=>p.status==="pending");
+  const done = c.practices.filter(p=>p.status==="done");
+  const avgScore = done.length ? Math.round(done.reduce((s,p)=>{
+    const r = c.results.find(r=>r.practiceId===p.id); return s + (r? r.score/r.total*100 : 0);
+  },0)/done.length) : null;
+
+  mainEl.innerHTML = `
+    <div class="topbar">
+      <div>
+        <h1>Hola, ${state.role==="padre" ? esc(c.nombre) : esc(c.nombre.split(" ")[0])} 👋</h1>
+        <div class="sub">${state.role==="padre" ? "Este es el resumen de "+esc(c.nombre)+"." : "¿Qué quieres practicar hoy?"} ${c.nivel} · ${c.grado} de secundaria en ${esc(c.pais)}.</div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <div class="card tight" style="text-align:center; min-width:88px;">
+          <div style="font-family:'Sora'; font-weight:800; font-size:20px;">${pending.length}</div>
+          <div style="font-size:11px; color:var(--ink-faint);">pendientes</div>
+        </div>
+        <div class="card tight" style="text-align:center; min-width:88px;">
+          <div style="font-family:'Sora'; font-weight:800; font-size:20px; color:${avgScore==null?'var(--ink-faint)':avgScore>=70?'var(--success)':'var(--danger)'};">${avgScore==null?"—":avgScore+"%"}</div>
+          <div style="font-size:11px; color:var(--ink-faint);">promedio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Empezar algo nuevo</h2>
+      <div class="grid-cards">
+        <button class="action-card" id="ac-practice">
+          <div class="icon" style="background:var(--brand-soft); color:var(--brand-ink);">${ICO.sparkle}</div>
+          <h3>Crear práctica con IA</h3>
+          <p>Elige curso, tema y dificultad. La IA genera las preguntas al instante.</p>
+        </button>
+        <button class="action-card" id="ac-material">
+          <div class="icon" style="background:var(--sun-soft); color:#8a5a00;">${ICO.camera}</div>
+          <h3>Subir material de clase</h3>
+          <p>Sube varias fotos de la pizarra, prácticas o el proyecto y genera un examen basado en lo enseñado.</p>
+        </button>
+        <button class="action-card" id="ac-progress">
+          <div class="icon" style="background:var(--success-bg); color:var(--success);">${ICO.chart}</div>
+          <h3>Ver progreso y errores</h3>
+          <p>Revisa en qué temas hay más dificultad para reforzarlos.</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Pendientes <span class="count">${pending.length}</span></h2>
+      <div class="card tight">
+        ${pending.length ? pending.map(p=>taskRow(p,c)).join("") : `<div class="empty">${ICO.check}<div>No hay tareas pendientes. ¡Vas al día!</div></div>`}
+      </div>
+    </div>
+
+    ${done.length? `<div class="section">
+      <h2>Historial reciente <span class="count">${done.length}</span></h2>
+      <div class="card tight">
+        ${done.slice(0,5).map(p=>taskRow(p,c)).join("")}
+      </div>
+    </div>` : ""}
+  `;
+  mainEl.querySelector("#ac-practice").onclick = openPracticeModal;
+  mainEl.querySelector("#ac-material").onclick = () => go("material");
+  mainEl.querySelector("#ac-progress").onclick = () => go("progress");
+  mainEl.querySelectorAll("[data-open-task]").forEach(b=>{
+    b.onclick = () => openTask(b.dataset.openTask);
+  });
+}
+
+function emptyChildState(){
+  return `<div class="topbar"><div><h1>Bienvenido a Rumbo al Futuro</h1><div class="sub">Registra a un estudiante para comenzar a crear prácticas y exámenes personalizados con IA.</div></div></div>
+  <div class="card" style="max-width:420px; text-align:center; padding:32px 20px;">
+    ${ICO.kid}
+    <h3 style="margin:10px 0 6px;">Ningún estudiante registrado</h3>
+    <p style="color:var(--ink-soft); font-size:13px; margin:0 0 16px;">Empieza registrando el nombre, edad, grado y cursos.</p>
+    <button class="btn btn-primary" id="startReg">${ICO.plus} Registrar estudiante</button>
+  </div>`;
+}
+function bindEmptyChild(){ const b = mainEl.querySelector("#startReg"); if(b) b.onclick = openNewChildModal; }
+
+function taskRow(p, c){
+  const r = c.results.find(r=>r.practiceId===p.id);
+  const isDone = p.status === "done";
+  const pct = r ? Math.round(r.score/r.total*100) : null;
+  return `<div class="task-row">
+    <div class="dot" style="background:${isDone ? (pct>=70?'var(--success)':'var(--danger)') : 'var(--sun)'};"></div>
+    <div class="txt">
+      <div class="title">${esc(p.tipo)} · ${esc(p.tema)}</div>
+      <div class="meta">${esc(p.curso)} · ${esc(p.dificultad)} · ${p.n} preguntas${isDone && pct!=null ? " · "+pct+"% correctas" : ""}</div>
+    </div>
+    ${isDone
+      ? `<span class="pill pill-done">Completado</span> <button class="btn btn-outline btn-sm" data-open-task="${p.id}">Ver resultado</button>`
+      : `<button class="btn btn-primary btn-sm" data-open-task="${p.id}">Empezar</button>`}
+  </div>`;
+}
+function openTask(id){
+  const c = currentChild(); if(!c) return;
+  const p = c.practices.find(p=>p.id===id); if(!p) return;
+  if(p.status === "done"){ state.viewResultId = p.id; go("results"); }
+  else { state.activePracticeId = p.id; go("quiz"); }
+}
+
+/* ---------------- CREAR PRÁCTICA (modal) ---------------- */
+function openPracticeModal(seedTemas){
+  const c = currentChild(); if(!c) return;
+  const cursosDisponibles = c.cursos.length ? c.cursos : CURSOS;
+  modalRoot.innerHTML = `
+    <div class="modal-back" id="mb">
+      <div class="modal">
+        <h2>Crear práctica con IA</h2>
+        <p class="lead">La IA generará preguntas ajustadas al curso, tema y dificultad elegidos.</p>
+        <div class="field">
+          <label>Curso</label>
+          <select id="p_curso">${cursosDisponibles.map(cu=>`<option value="${esc(cu)}">${cu}</option>`).join("")}</select>
+        </div>
+        <div class="field">
+          <label>Tema</label>
+          <select id="p_tema"></select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Dificultad</label>
+            <select id="p_dif"><option>Fácil</option><option selected>Intermedio</option><option>Difícil</option></select>
+          </div>
+          <div class="field">
+            <label>N.º de preguntas</label>
+            <select id="p_n"><option>5</option><option selected>10</option><option>15</option><option>20</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Tipo</label>
+          <div class="chip-select">
+            <span class="chip on" data-t="Práctica">Práctica</span>
+            <span class="chip" data-t="Cuestionario">Cuestionario</span>
+            <span class="chip" data-t="Simulacro de examen">Simulacro de examen</span>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-outline btn-sm" id="cancelP">Cancelar</button>
+          <button class="btn btn-primary btn-sm" id="genP">${ICO.sparkle} Generar con IA</button>
+        </div>
+      </div>
+    </div>
+  `;
+  const cursoSel = modalRoot.querySelector("#p_curso");
+  const temaSel = modalRoot.querySelector("#p_tema");
+  function fillTemas(){
+    const temas = (TEMARIO[cursoSel.value]||[]).filter(t => BANK[t]);
+    temaSel.innerHTML = temas.length ? temas.map(t=>`<option value="${esc(t)}">${t}</option>`).join("") : `<option value="">(próximamente)</option>`;
+  }
+  fillTemas();
+  cursoSel.onchange = fillTemas;
+  if(seedTemas){ cursoSel.value = temaCurso(seedTemas[0]); fillTemas(); temaSel.value = seedTemas[0]; }
+
+  let tipo = "Práctica";
+  modalRoot.querySelectorAll("[data-t]").forEach(ch=>{
+    ch.onclick = () => { modalRoot.querySelectorAll("[data-t]").forEach(x=>x.classList.remove("on")); ch.classList.add("on"); tipo = ch.dataset.t; };
+  });
+
+  modalRoot.querySelector("#cancelP").onclick = closeModal;
+  modalRoot.querySelector("#genP").onclick = () => {
+    const tema = temaSel.value;
+    if(!tema){ closeModal(); return; }
+    const btn = modalRoot.querySelector("#genP");
+    btn.disabled = true; btn.innerHTML = `${ICO.sparkle} Generando…`;
+    setTimeout(async ()=>{
+      const n = parseInt(modalRoot.querySelector("#p_n").value);
+      const dif = modalRoot.querySelector("#p_dif").value;
+      const row = { student_id: c.id, curso: cursoSel.value, tema, dificultad: dif, tipo, n, status:"pending" };
+      const { data, error } = await sb.from("practices").insert(row).select().single();
+      if(error){ alert("No se pudo crear la práctica: " + error.message); btn.disabled=false; btn.innerHTML=`${ICO.sparkle} Generar con IA`; return; }
+      c.practices.unshift({ ...row, id: data.id, createdAt: Date.now() });
+      closeModal();
+      state.activePracticeId = data.id;
+      go("quiz");
+    }, 700);
+  };
+}
+
+/* ---------------- SUBIR MATERIAL ---------------- */
+let uploadedFiles = [];
+function renderMaterialUpload(){
+  const c = currentChild(); if(!c){ mainEl.innerHTML = emptyChildState(); bindEmptyChild(); return; }
+  mainEl.innerHTML = `
+    <div class="topbar">
+      <div><h1>Subir material de clase</h1>
+      <div class="sub">Sube todas las fotos y documentos de una clase: pizarra, apuntes, prácticas, tareas y proyectos. La IA analiza todo el conjunto para identificar los temas realmente enseñados.</div></div>
+    </div>
+    <div class="card" style="max-width:640px;">
+      <div class="dropzone" id="dz">
+        ${ICO.camera}
+        <div><b>Selecciona varias fotos o archivos</b></div>
+        <div>Fotos de pizarra, libro, separatas, prácticas, tareas, proyecto, exámenes anteriores (JPG, PNG, PDF)</div>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*,.pdf" style="display:none;">
+      <div class="file-list" id="fileList"></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:16px;">
+        <button class="btn btn-primary" id="analyzeBtn" disabled>${ICO.sparkle} Analizar material con IA</button>
+      </div>
+      <div id="analysisResult" style="margin-top:18px;"></div>
+    </div>
+  `;
+  const dz = mainEl.querySelector("#dz");
+  const input = mainEl.querySelector("#fileInput");
+  const listEl = mainEl.querySelector("#fileList");
+  const analyzeBtn = mainEl.querySelector("#analyzeBtn");
+
+  dz.onclick = () => input.click();
+  input.onchange = () => {
+    Array.from(input.files).forEach(f => uploadedFiles.push({name:f.name, kind:guessKind(f.name)}));
+    renderFileList();
+  };
+
+  function guessKind(name){
+    const n = name.toLowerCase();
+    if(n.endsWith(".pdf")) return "pdf";
+    return "img";
+  }
+  function renderFileList(){
+    listEl.innerHTML = uploadedFiles.map((f,i)=>`
+      <div class="file-item">
+        <div class="fdot">${f.kind==="pdf"?ICO.pdf:ICO.camera}</div>
+        <div class="fname">${esc(f.name)}</div>
+        <button data-rm="${i}">${ICO.x}</button>
+      </div>`).join("");
+    listEl.querySelectorAll("[data-rm]").forEach(b=>{
+      b.onclick = () => { uploadedFiles.splice(parseInt(b.dataset.rm),1); renderFileList(); };
+    });
+    analyzeBtn.disabled = uploadedFiles.length === 0;
+  }
+  renderFileList();
+
+  analyzeBtn.onclick = () => {
+    analyzeBtn.disabled = true;
+    analyzeBtn.innerHTML = `${ICO.sparkle} Analizando ${uploadedFiles.length} archivos…`;
+    const resEl = mainEl.querySelector("#analysisResult");
+    resEl.innerHTML = `<div class="empty">${ICO.clock}<div>Leyendo imágenes, aplicando OCR y detectando temas…</div></div>`;
+    setTimeout(()=>{
+      // simulated multi-topic detection from a batch of class photos
+      const cursosDelHijo = c.cursos.length ? c.cursos : ["Matemática"];
+      const cursoDetectado = cursosDelHijo[0];
+      const temasDetectados = (TEMARIO[cursoDetectado]||["Fracciones"]).filter(t=>BANK[t]).slice(0,3);
+      renderAnalysis(resEl, cursoDetectado, temasDetectados);
+      analyzeBtn.innerHTML = `${ICO.sparkle} Analizar material con IA`;
+      analyzeBtn.disabled = false;
+    }, 1300);
+  };
+}
+
+function renderAnalysis(resEl, curso, temas){
+  resEl.innerHTML = `
+    <div class="analysis-box">
+      <h4>${ICO.check} Material analizado</h4>
+      <div style="font-size:12.5px; margin-bottom:10px;">
+        <b>Curso detectado:</b> ${esc(curso)} &nbsp;·&nbsp; <b>Nivel:</b> ${esc(currentChild().nivel)} ${esc(currentChild().grado)}<br>
+        <b>Archivos procesados:</b> ${uploadedFiles.length} (pizarra, prácticas, tareas y proyecto)
+      </div>
+      <div style="font-size:12px; font-weight:600; margin-bottom:6px; color:var(--ink-soft);">Temas identificados en el material:</div>
+      <div>${temas.map(t=>`<span class="topic-tag"><b>${esc(t)}</b> · ejemplos y ejercicios detectados</span>`).join("")}</div>
+      <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-sun btn-sm" id="genFromMaterial">${ICO.sparkle} Generar examen con este material</button>
+      </div>
+    </div>
+  `;
+  resEl.querySelector("#genFromMaterial").onclick = () => {
+    uploadedFiles = [];
+    closeModal();
+    openPracticeModal(temas);
+  };
+}
+
+/* ---------------- TAREAS/PRÁCTICAS LIST ---------------- */
+function renderPractices(){
+  const c = currentChild(); if(!c){ mainEl.innerHTML = emptyChildState(); bindEmptyChild(); return; }
+  mainEl.innerHTML = `
+    <div class="topbar">
+      <div><h1>Tareas y prácticas</h1><div class="sub">Todo lo generado para ${esc(c.nombre)}: prácticas, cuestionarios y simulacros.</div></div>
+      <button class="btn btn-primary" id="newP">${ICO.plus} Nueva práctica</button>
+    </div>
+    <div class="card tight">
+      ${c.practices.length ? c.practices.map(p=>taskRow(p,c)).join("") : `<div class="empty">${ICO.tasks}<div>Aún no hay prácticas creadas.</div></div>`}
+    </div>
+  `;
+  mainEl.querySelector("#newP").onclick = openPracticeModal;
+  mainEl.querySelectorAll("[data-open-task]").forEach(b=> b.onclick = () => openTask(b.dataset.openTask));
+}
+
+/* ---------------- QUIZ ---------------- */
+let quizAnswers = [];
+function renderQuiz(){
+  const c = currentChild(); if(!c) return go("home");
+  const p = c.practices.find(p=>p.id===state.activePracticeId);
+  if(!p) return go("home");
+  if(!state.quizQuestions || state.quizPracticeId !== p.id){
+    state.quizQuestions = pickQuestions(p.tema, p.n);
+    state.quizIdx = 0;
+    quizAnswers = new Array(p.n).fill(null);
+    state.quizPracticeId = p.id;
+  }
+  const idx = state.quizIdx;
+  const total = state.quizQuestions.length;
+  const q = state.quizQuestions[idx];
+  const answered = quizAnswers[idx] !== null;
+
+  mainEl.innerHTML = `
+    <div class="quiz-shell">
+      <div class="topbar" style="margin-bottom:10px;">
+        <div><h1 style="font-size:18px;">${esc(p.tipo)} · ${esc(p.tema)}</h1>
+        <div class="sub">${esc(p.curso)} · ${esc(p.dificultad)} · Pregunta ${idx+1} de ${total}</div></div>
+        <button class="btn btn-outline btn-sm" id="exitQuiz">Salir</button>
+      </div>
+      <div class="qprogress">
+        ${state.quizQuestions.map((_,i)=>{
+          let cls = i===idx ? "cur" : "";
+          if(quizAnswers[i] !== null){ cls = quizAnswers[i] === state.quizQuestions[i].c ? "done" : "wrong"; }
+          return `<div class="seg ${cls}"></div>`;
+        }).join("")}
+      </div>
+      <div class="qcard">
+        <div class="qmeta">
+          <span class="pill pill-brand">${esc(q.sub)}</span>
+          <span class="pill" style="background:var(--surface-2); color:var(--ink-soft);">${esc(q.dif)}</span>
+          ${q.variant?'<span class="pill" style="background:var(--sun-soft); color:#8a5a00;">Variante generada</span>':''}
+        </div>
+        <p class="qtext">${esc(q.q)}</p>
+        <div id="opts">
+          ${q.opts.map((o,oi)=>`<button class="opt" data-oi="${oi}"><span class="letter">${"ABCD"[oi]}</span><span>${esc(o)}</span></button>`).join("")}
+        </div>
+        <div id="explainWrap"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:16px;">
+          <button class="btn btn-outline btn-sm" id="prevQ" ${idx===0?'disabled':''}>Anterior</button>
+          <button class="btn btn-primary btn-sm" id="nextQ" ${answered?'':'disabled'}>${idx===total-1?'Terminar':'Siguiente'}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  if(answered) showAnswerState(q, quizAnswers[idx]);
+
+  mainEl.querySelectorAll(".opt").forEach(b=>{
+    b.onclick = () => {
+      if(quizAnswers[idx] !== null) return;
+      const oi = parseInt(b.dataset.oi);
+      quizAnswers[idx] = oi;
+      showAnswerState(q, oi);
+      mainEl.querySelector("#nextQ").disabled = false;
+      updateProgressSegs();
+    };
+  });
+  mainEl.querySelector("#exitQuiz").onclick = () => { state.quizQuestions=null; go("practices"); };
+  mainEl.querySelector("#prevQ").onclick = () => { state.quizIdx--; render(); };
+  mainEl.querySelector("#nextQ").onclick = () => {
+    if(idx < total-1){ state.quizIdx++; render(); }
+    else {
+      const btn = mainEl.querySelector("#nextQ");
+      btn.disabled = true; btn.textContent = "Guardando…";
+      finishQuiz(p);
+    }
+  };
+}
+function updateProgressSegs(){
+  document.querySelectorAll(".qprogress .seg").forEach((seg,i)=>{
+    if(i===state.quizIdx){
+      seg.className = "seg " + (quizAnswers[i]===state.quizQuestions[i].c ? "done" : "wrong");
+    }
+  });
+}
+function showAnswerState(q, chosen){
+  document.querySelectorAll(".opt").forEach((b,oi)=>{
+    b.disabled = true;
+    if(oi === q.c) b.classList.add("correct");
+    else if(oi === chosen) b.classList.add("incorrect");
+  });
+  document.getElementById("explainWrap").innerHTML = `
+    <div class="explain"><b>${chosen===q.c?'¡Correcto! ':'No es correcto. '}</b>${esc(q.why)}</div>
+  `;
+}
+async function finishQuiz(p){
+  const c = currentChild();
+  const answered = state.quizQuestions.map((q,i)=>({...q, chosen: quizAnswers[i]}));
+  const score = answered.filter(a=>a.chosen===a.c).length;
+  const total = answered.length;
+
+  const { error: upErr } = await sb.from("practices").update({ status:"done" }).eq("id", p.id);
+  if(upErr) console.error(upErr);
+  const { data, error } = await sb.from("results").insert({
+    practice_id: p.id, student_id: c.id, curso: p.curso, tema: p.tema, score, total, answered,
+  }).select().single();
+  if(error){ alert("No se pudo guardar el resultado: " + error.message); return; }
+
+  p.status = "done";
+  c.results.unshift({ id:data.id, practiceId:p.id, tema:p.tema, curso:p.curso, score, total, date:Date.now(), answered });
+  state.quizQuestions = null;
+  state.viewResultId = data.id;
+  go("results");
+}
+
+/* ---------------- RESULTS ---------------- */
+function renderResults(){
+  const c = currentChild(); if(!c) return go("home");
+  const r = c.results.find(r=>r.id===state.viewResultId) || c.results[0];
+  if(!r){ mainEl.innerHTML = `<div class="empty">${ICO.tasks}<div>Aún no hay resultados.</div></div>`; return; }
+  const pct = Math.round(r.score/r.total*100);
+  const color = pct>=70 ? "var(--success)" : pct>=40 ? "var(--sun)" : "var(--danger)";
+  const wrong = r.answered.filter(a=>a.chosen!==a.c);
+
+  mainEl.innerHTML = `
+    <div class="topbar">
+      <div><h1>Resultado</h1><div class="sub">${esc(r.tema)} · ${esc(r.curso)} · ${new Date(r.date).toLocaleDateString('es-PE',{day:'numeric',month:'short',year:'numeric'})}</div></div>
+      <button class="btn btn-outline btn-sm" id="backList">Volver</button>
+    </div>
+    <div class="card" style="display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
+      <div class="score-ring" style="background:conic-gradient(${color} ${pct*3.6}deg, var(--surface-2) 0deg);">
+        <div style="width:88px;height:88px;border-radius:50%;background:var(--surface); display:flex; align-items:center; justify-content:center;">
+          <div class="score-ring-inner num" style="font-family:'Sora'; font-weight:800; font-size:24px;">${pct}<small>%</small></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600;">${r.score} de ${r.total} respuestas correctas</div>
+        <div style="font-size:12.5px; color:var(--ink-soft); margin-top:4px;">${pct>=70?'Buen dominio del tema.':pct>=40?'Dominio parcial — conviene repasar.':'Se recomienda reforzar este tema.'}</div>
+        ${wrong.length ? `<button class="btn btn-sun btn-sm" style="margin-top:10px;" id="retryWrong">${ICO.refresh} Practicar de nuevo estos errores</button>` : ""}
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Revisión de respuestas</h2>
+      ${r.answered.map((a,i)=>`
+        <div class="card tight" style="margin-bottom:8px;">
+          <div style="display:flex; gap:8px; align-items:flex-start;">
+            <span class="pill ${a.chosen===a.c?'pill-done':''}" style="background:${a.chosen===a.c?'var(--success-bg)':'var(--danger-bg)'}; color:${a.chosen===a.c?'var(--success)':'var(--danger)'};">${i+1}</span>
+            <div style="flex:1;">
+              <div style="font-size:13.5px; font-weight:600; margin-bottom:4px;">${esc(a.q)}</div>
+              <div style="font-size:12.5px; color:var(--ink-soft);">
+                Tu respuesta: <b style="color:${a.chosen===a.c?'var(--success)':'var(--danger)'};">${a.opts[a.chosen]!=null? esc(a.opts[a.chosen]) : "sin responder"}</b>
+                ${a.chosen!==a.c ? ` · Correcta: <b style="color:var(--success);">${esc(a.opts[a.c])}</b>` : ""}
+              </div>
+              <div class="explain" style="margin-top:8px;">${esc(a.why)}</div>
+            </div>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+  mainEl.querySelector("#backList").onclick = () => go("practices");
+  const rw = mainEl.querySelector("#retryWrong");
+  if(rw) rw.onclick = async () => {
+    rw.disabled = true; rw.textContent = "Preparando…";
+    const row = { student_id: c.id, curso:r.curso, tema:r.tema, dificultad:"Intermedio", n: wrong.length, tipo:"Repaso de errores", status:"pending" };
+    const { data, error } = await sb.from("practices").insert(row).select().single();
+    if(error){ alert("No se pudo crear el repaso: " + error.message); rw.disabled=false; return; }
+    c.practices.unshift({ ...row, id: data.id, createdAt: Date.now() });
+    state.activePracticeId = data.id;
+    go("quiz");
+  };
+}
+
+/* ---------------- PROGRESO ---------------- */
+function renderProgress(){
+  const c = currentChild(); if(!c){ mainEl.innerHTML = emptyChildState(); bindEmptyChild(); return; }
+  const byTema = {};
+  c.results.forEach(r=>{
+    byTema[r.tema] = byTema[r.tema] || {score:0,total:0,curso:r.curso};
+    byTema[r.tema].score += r.score; byTema[r.tema].total += r.total;
+  });
+  const temas = Object.entries(byTema).sort((a,b)=> (a[1].score/a[1].total) - (b[1].score/b[1].total));
+  const weak = temas.filter(([,v])=> v.score/v.total < 0.7);
+
+  mainEl.innerHTML = `
+    <div class="topbar"><div><h1>Progreso de ${esc(c.nombre)}</h1><div class="sub">Rendimiento por tema, a partir de ${c.results.length} práctica(s) resuelta(s).</div></div></div>
+
+    ${temas.length ? `<div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:14px; margin:0 0 14px;">Precisión por tema</h3>
+      ${temas.map(([tema,v])=>{
+        const pct = Math.round(v.score/v.total*100);
+        const col = pct>=70?'var(--success)':pct>=40?'var(--sun)':'var(--danger)';
+        return `<div class="bar-row"><div class="lbl">${esc(tema)}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${col};"></div></div><div class="bar-val mono">${pct}%</div></div>`;
+      }).join("")}
+    </div>` : `<div class="empty">${ICO.chart}<div>Aún no hay suficientes prácticas resueltas para mostrar estadísticas.</div></div>`}
+
+    ${weak.length ? `<div class="section">
+      <h2>${ICO.target} Temas con más dificultad</h2>
+      <div class="card tight">
+        ${weak.map(([tema,v])=>`
+          <div class="task-row">
+            <div class="dot" style="background:var(--danger);"></div>
+            <div class="txt"><div class="title">${esc(tema)}</div><div class="meta">${v.score}/${v.total} correctas · ${esc(v.curso)}</div></div>
+            <button class="btn btn-outline btn-sm" data-retema="${esc(tema)}">Reforzar</button>
+          </div>
+        `).join("")}
+      </div>
+    </div>` : ""}
+
+    <div class="section">
+      <h2>Historial completo</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fecha</th><th>Curso</th><th>Tema</th><th>Resultado</th></tr></thead>
+          <tbody>
+          ${c.results.length ? c.results.map(r=>`
+            <tr>
+              <td>${new Date(r.date).toLocaleDateString('es-PE',{day:'numeric',month:'short'})}</td>
+              <td>${esc(r.curso)}</td>
+              <td>${esc(r.tema)}</td>
+              <td class="mono">${r.score}/${r.total} (${Math.round(r.score/r.total*100)}%)</td>
+            </tr>
+          `).join("") : `<tr><td colspan="4" style="color:var(--ink-faint);">Sin intentos aún</td></tr>`}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  mainEl.querySelectorAll("[data-retema]").forEach(b=>{
+    b.onclick = () => openPracticeModal([b.dataset.retema]);
+  });
+}
+
+/* ---------------- HIJOS / PERFIL ---------------- */
+function renderChildren(){
+  mainEl.innerHTML = `
+    <div class="topbar">
+      <div><h1>${state.role==="padre"?"Mis hijos":"Mi perfil"}</h1><div class="sub">${state.role==="padre"?"Gestiona los estudiantes registrados en la familia.":"Datos de tu perfil de estudiante."}</div></div>
+      ${state.role==="padre" ? `<button class="btn btn-primary" id="addChild">${ICO.plus} Registrar hijo</button>` : ""}
+    </div>
+    <div class="grid-cards">
+      ${state.children.map(c=>{
+        const pct = c.results.length ? Math.round(c.results.reduce((s,r)=>s+r.score/r.total,0)/c.results.length*100) : null;
+        return `<div class="card">
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+            <div class="who-card .avatar" style="width:38px;height:38px;border-radius:10px; background:var(--sun-soft); color:#8a5a00; display:flex; align-items:center; justify-content:center; font-weight:700;">${esc(c.nombre[0])}</div>
+            <div>
+              <div style="font-weight:700; font-size:14.5px;">${esc(c.nombre)} ${esc(c.apellidos)}</div>
+              <div style="font-size:12px; color:var(--ink-faint);">${c.nivel} · ${c.grado} · ${c.edad?c.edad+" años":""}</div>
+            </div>
+          </div>
+          <div style="font-size:12px; color:var(--ink-soft); margin-bottom:10px;">
+            ${c.colegio? esc(c.colegio)+" · ":""}${esc(c.pais)}<br>
+            Cursos: ${c.cursos.length? c.cursos.map(esc).join(", ") : "sin definir"}
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="pill pill-brand">${pct==null?"Sin datos":pct+"% promedio"}</span>
+            <button class="btn btn-outline btn-sm" data-enter="${c.id}">Entrar</button>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>
+  `;
+  const add = mainEl.querySelector("#addChild");
+  if(add) add.onclick = openNewChildModal;
+  mainEl.querySelectorAll("[data-enter]").forEach(b=>{
+    b.onclick = () => { state.currentChildId = b.dataset.enter; state.view="home"; saveState(); render(); };
+  });
+}
+
+/* ---------------- BOOT ---------------- */
+boot();
+})();
+</script>
+</body>
+</html>
